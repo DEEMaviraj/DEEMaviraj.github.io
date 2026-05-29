@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Deemantha Viraj</title>
+    <link rel="icon" href="../assets/images/my2.jpg" type="image/jpg">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+
+        /*  Page layout */
+        .portfolio {
+            position: relative;
+            z-index: 1;
+            padding: 110px 10% 80px;
+        }
+
+        /* Heading */
+        .portfolio-intro {
+            text-align: center;
+            margin-bottom: 54px;
+            animation: fadeDown 0.7s ease forwards;
+            opacity: 0;
+        }
+
+        .portfolio-intro h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-intro h1 span { color: #00abf0; }
+
+        .portfolio-intro p {
+            font-size: 15px;
+            color: #b0c4d3;
+        }
+
+        .heading-line {
+            width: 60px;
+            height: 3px;
+            background: #00abf0;
+            border-radius: 2px;
+            margin: 12px auto 0;
+            transform: scaleX(0);
+            transform-origin: center;
+            animation: expandLine 0.6s ease 0.5s forwards;
+        }
+
+        @keyframes expandLine {
+            to { transform: scaleX(1); }
+        }
+
+        /* Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        /* Project card link wrapper */
+        .project-link {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            animation: fadeSlideUp 0.7s ease forwards;
+            opacity: 0;
+        }
+
+        .project-link:nth-child(1) { animation-delay: 0.2s; }
+        .project-link:nth-child(2) { animation-delay: 0.4s; }
+        .project-link:nth-child(3) { animation-delay: 0.6s; }
+
+        /* Card */
+        .project-card {
+            background: #112e42;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: transform 0.35s ease, border 0.35s ease, box-shadow 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0,171,240,0.4);
+            box-shadow: 0 20px 50px rgba(0,171,240,0.12);
+        }
+
+        /* Image + overlay */
+        .card-image-wrap {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image-wrap img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .card-image-wrap img {
+            transform: scale(1.06);
+        }
+
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,171,240,0.12);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-card:hover .card-overlay { opacity: 1; }
+
+        .overlay-text {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(0,171,240,0.85);
+            padding: 8px 20px;
+            border-radius: 20px;
+            transform: translateY(10px);
+            transition: transform 0.35s ease;
+        }
+
+        .project-card:hover .overlay-text { transform: translateY(0); }
+
+        /* Card body */
+        .card-body {
+            padding: 22px 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .card-tag {
+            background: rgba(0,171,240,0.1);
+            color: #00abf0;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(0,171,240,0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-body h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ededed;
+            margin: 0;
+            transition: color 0.3s;
+        }
+
+        .project-card:hover .card-body h3 { color: #00abf0; }
+
+        .card-body p {
+            font-size: 14px;
+            color: #b0c4d3;
+            line-height: 1.7;
+            margin: 0;
+            flex: 1;
+        }
+
+        /* Card footer */
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            border-top: 1px solid rgba(0,171,240,0.08);
+            transition: background 0.3s;
+        }
+
+        .project-card:hover .card-footer {
+            background: rgba(0,171,240,0.04);
+        }
+
+        .card-link-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #00abf0;
+            transition: letter-spacing 0.3s;
+        }
+
+        .project-card:hover .card-link-text { letter-spacing: 1px; }
+
+        .card-arrow {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(0,171,240,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #00abf0;
+            transition: background 0.3s, border 0.3s, transform 0.3s, color 0.3s;
+        }
+
+        .project-card:hover .card-arrow {
+            background: #00abf0;
+            border-color: #00abf0;
+            color: #0a1f28;
+            transform: translateX(3px);
+        }
+
+        /* Keyframes */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(36px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .portfolio { padding: 100px 5% 60px; }
+            .portfolio-intro h1 { font-size: 30px; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <header class="header">
+        <a href="../index.html" class="logo">Portfolio</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav class="navbar" id="navbar">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <main>
+        <section class="portfolio">
+
+            <div class="portfolio-intro">
+                <h1>My <span>Projects</span></h1>
+                <p>Some of the work I've done as a developer.</p>
+                <div class="heading-line"></div>
+            </div>
+
+            <div class="portfolio-grid">
+
+                <!-- Project 1 -->
+                <a href="projects/project1.html" class="project-link">
+                    <div class="project-card">
+                        <div class="card-image-wrap">
+                            <img src="../assets/images/cprogramming.png" alt="Maze Runner project">
+                            <div class="card-overlay">
+                                <span class="overlay-text">View Project</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-tags">
+                                <span class="card-tag">C</span>
+                                <span class="card-tag">Game</span>
+                            </div>
+                            <h3>Maze Runner</h3>
+                            <p>Maze of UCSC is a classical three player maze runner game developed in C.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-link-text">View Project</span>
+                            <span class="card-arrow">→</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="projects/project2.html" class="project-link">
+                    <div class="project-card">
+                        <div class="card-image-wrap">
+                            <img src="../assets/images/htmlcss.png" alt="Portfolio Website project">
+                            <div class="card-overlay">
+                                <span class="overlay-text">View Project</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-tags">
+                                <span class="card-tag">HTML</span>
+                                <span class="card-tag">CSS</span>
+                            </div>
+                            <h3>Portfolio Website</h3>
+                            <p>My personal portfolio website showcasing projects and skills.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-link-text">View Project</span>
+                            <span class="card-arrow">→</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="projects/project3.html" class="project-link">
+                    <div class="project-card">
+                        <div class="card-image-wrap">
+                            <img src="../assets/images/bfs.png" alt="Breadth First Search project">
+                            <div class="card-overlay">
+                                <span class="overlay-text">View Project</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-tags">
+                                <span class="card-tag">C</span>
+                                <span class="card-tag">Algorithm</span>
+                            </div>
+                            <h3>Breadth First Search</h3>
+                            <p>A C implementation of the Breadth First Search algorithm.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-link-text">View Project</span>
+                            <span class="card-arrow">→</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Deemantha Viraj. All rights reserved.</p>
+        <nav class="footer-nav">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </footer>
+
+    <script src="../js/script.js"></script>
+
+</body>
+</html>

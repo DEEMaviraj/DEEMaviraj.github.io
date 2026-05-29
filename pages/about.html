@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Deemantha Viraj</title>
+    <link rel="icon" href="../assets/images/my2.jpg" type="image/jpg">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+
+        /* Layout */
+        .about {
+            position: relative;
+            z-index: 1;
+            padding: 110px 10% 80px;
+        }
+
+        /*  Page heading */
+        .about-heading {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeDown 0.7s ease forwards;
+            opacity: 0;
+        }
+
+        .about-heading h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .about-heading h1 span { color: #00abf0; }
+
+        .about-heading p {
+            font-size: 15px;
+            color: #b0c4d3;
+        }
+
+        .heading-line {
+            width: 60px;
+            height: 3px;
+            background: #00abf0;
+            border-radius: 2px;
+            margin: 12px auto 0;
+            transform: scaleX(0);
+            transform-origin: center;
+            animation: expandLine 0.6s ease 0.5s forwards;
+        }
+
+        @keyframes expandLine {
+            to { transform: scaleX(1); }
+        }
+
+        /*  Container  */
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ── ROW 1: Image + 2x2 ── */
+        .intro-row {
+            display: flex;
+            align-items: stretch;
+            gap: 24px;
+            animation: fadeSlideUp 0.7s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .about-image {
+            flex: 0 0 auto;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 240px;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            border-radius: 20px;
+            display: block;
+            border: 2px solid rgba(0,171,240,0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+        }
+
+        .about-image img:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,171,240,0.25);
+            border-color: #00abf0;
+        }
+
+        /* Corner accent brackets */
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -6px; left: -6px;
+            width: 40px; height: 40px;
+            border-top: 3px solid #00abf0;
+            border-left: 3px solid #00abf0;
+            border-radius: 4px 0 0 0;
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            bottom: -6px; right: -6px;
+            width: 40px; height: 40px;
+            border-bottom: 3px solid #00abf0;
+            border-right: 3px solid #00abf0;
+            border-radius: 0 0 4px 0;
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .about-image:hover::before,
+        .about-image:hover::after {
+            width: 60px; height: 60px;
+        }
+
+        .intro-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .intro-grid-row {
+            display: flex;
+            gap: 24px;
+            flex: 1;
+        }
+
+        .intro-grid-row .info-box { flex: 1; }
+
+        /* ── Info boxes ── */
+        .info-box {
+            background: #112e42;
+            padding: 22px 26px;
+            border-radius: 14px;
+            border: 1px solid transparent;
+            transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Shimmer sweep on hover */
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,171,240,0.06), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .info-box:hover::before { left: 150%; }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0,171,240,0.4);
+            box-shadow: 0 8px 24px rgba(0,171,240,0.1);
+        }
+
+        .info-box h3 {
+            font-size: 11px;
+            font-weight: 700;
+            color: #00abf0;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 8px;
+        }
+
+        .info-box p {
+            font-size: 15px;
+            font-weight: 600;
+            color: #ededed;
+            margin: 0;
+        }
+
+        /* ROW 2: University full width */
+        .full-box {
+            animation: fadeSlideUp 0.7s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .full-box .info-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px 30px;
+        }
+
+        .full-box .info-box h3 { margin-bottom: 0; white-space: nowrap; }
+
+        .full-box .info-box p { font-size: 16px; }
+
+        .univ-icon { font-size: 26px; flex-shrink: 0; }
+
+        /*  ROW 3: 4 boxes */
+        .about-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeSlideUp 0.7s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .about-info .info-box { flex: 1; min-width: 180px; }
+
+        /* ── Bio ── */
+        .about-bio {
+            background: #112e42;
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid transparent;
+            transition: border 0.3s;
+            animation: fadeSlideUp 0.7s ease 0.8s forwards;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-bio:hover { border-color: rgba(0,171,240,0.3); }
+
+        /* Left accent bar */
+        .about-bio::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: linear-gradient(180deg, #00abf0, transparent);
+            border-radius: 2px 0 0 2px;
+        }
+
+        .about-bio h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00abf0;
+            margin-bottom: 14px;
+        }
+
+        .about-bio p {
+            font-size: 15px;
+            color: #b0c4d3;
+            line-height: 1.85;
+            margin: 0 0 12px;
+        }
+
+        .about-bio p:last-child { margin-bottom: 0; }
+
+        /* Skills table */
+        .skills-wrapper {
+            background: #112e42;
+            border-radius: 16px;
+            padding: 32px;
+            overflow-x: auto;
+            animation: fadeSlideUp 0.7s ease 1s forwards;
+            opacity: 0;
+            border: 1px solid transparent;
+            transition: border 0.3s;
+        }
+
+        .skills-wrapper:hover { border-color: rgba(0,171,240,0.2); }
+
+        .skills-wrapper h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00abf0;
+            margin-bottom: 20px;
+        }
+
+        .skills-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .skills-table thead tr {
+            background: rgba(0,171,240,0.08);
+        }
+
+        .skills-table th {
+            padding: 13px 18px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 700;
+            color: #00abf0;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .skills-table td {
+            padding: 13px 18px;
+            color: #b0c4d3;
+            border-bottom: 1px solid rgba(0,171,240,0.07);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .skills-table tbody tr:hover td {
+            background: rgba(0,171,240,0.04);
+            color: #ededed;
+        }
+
+        .skills-table tbody tr:last-child td { border-bottom: none; }
+
+        .level {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .level.beginner     { background: rgba(255,170,0,0.12);  color: #ffaa00; }
+        .level.intermediate { background: rgba(0,171,240,0.12);  color: #00abf0; }
+        .level.advanced     { background: rgba(0,240,144,0.12);  color: #00f090; }
+
+        /* Keyframes */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .intro-row { flex-direction: column; align-items: center; }
+            .about-image img { width: 100%; max-width: 280px; height: 280px; }
+            .intro-column { width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            .about { padding: 100px 5% 60px; }
+            .about-heading h1 { font-size: 28px; }
+            .intro-grid-row { flex-direction: column; }
+            .about-info { flex-direction: column; }
+            .about-bio, .skills-wrapper { padding: 22px; }
+            .full-box .info-box { flex-direction: column; align-items: flex-start; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <header class="header">
+        <a href="../index.html" class="logo">Portfolio</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav class="navbar" id="navbar">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+<!-- Overlay -->
+<div class="nav-overlay" id="navOverlay"></div>
+
+    <main>
+        <section class="about">
+
+            <div class="about-heading">
+                <h1>About <span>Me</span></h1>
+                <p>Get to know me a little better</p>
+                <div class="heading-line"></div>
+            </div>
+
+            <div class="about-container">
+
+                <!-- Row 1: Image + 2x2 grid -->
+                <div class="intro-row">
+                    <div class="about-image">
+                        <img src="../assets/images/my2.jpg" alt="Deemantha Viraj">
+                    </div>
+                    <div class="intro-column">
+                        <div class="intro-grid-row">
+                            <div class="info-box">
+                                <h3>Name</h3>
+                                <p>Deemantha Viraj</p>
+                            </div>
+                            <div class="info-box">
+                                <h3>From</h3>
+                                <p>Sri Lanka</p>
+                            </div>
+                        </div>
+                        <div class="intro-grid-row">
+                            <div class="info-box">
+                                <h3>Current Roles</h3>
+                                <p>ICT Tutor, Freelancer</p>
+                            </div>
+                            <div class="info-box">
+                                <h3>Skills</h3>
+                                <p>Problem Solving, Continuous Learning</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: University full width -->
+                <div class="full-box">
+                    <div class="info-box full-width">
+                        <span class="univ-icon">🎓</span>
+                        <h3>University</h3>
+                        <p>University of Colombo</p>
+                    </div>
+                </div>
+
+                <!-- Row 3: 4 info boxes -->
+                <div class="about-info">
+                    <div class="info-box">
+                        <h3>Education</h3>
+                        <p>BSc. in Computer Science (UG)</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Focus</h3>
+                        <p>Programming &amp; Software Development</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Interests</h3>
+                        <p>Artificial Intelligence, Machine Learning</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Programming Languages</h3>
+                        <p>C, C++, Python</p>
+                    </div>
+                </div>
+
+                <!-- Bio -->
+                <div class="about-bio">
+                    <h3>My Story</h3>
+                    <p>
+                        I am a Computer Science undergraduate at the University of Colombo with a passion for
+                        software development and algorithmic thinking. I spend my time building projects that
+                        challenge me.
+                    </p>
+                    <p>
+                        Outside of academics I work as an ICT tutor and take on freelance development projects.
+                        I am particularly interested in Artificial Intelligence and Machine Learning, and I
+                        continuously work on developing skills in those areas alongside my core studies.
+                    </p>
+                </div>
+
+                <!-- Skills table -->
+                <div class="skills-wrapper">
+                    <h3>Technical Skills</h3>
+                    <table class="skills-table">
+                        <thead>
+                            <tr>
+                                <th>Skill</th>
+                                <th>Category</th>
+                                <th>Level</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>C / C++</td>
+                                <td>Programming</td>
+                                <td><span class="level intermediate">Intermediate</span></td>
+                            </tr>
+                            <tr>
+                                <td>Python</td>
+                                <td>Programming</td>
+                                <td><span class="level intermediate">Intermediate</span></td>
+                            </tr>
+                            <tr>
+                                <td>HTML &amp; CSS</td>
+                                <td>Web Development</td>
+                                <td><span class="level advanced">Advanced</span></td>
+                            </tr>
+                            <tr>
+                                <td>PHP</td>
+                                <td>Web Development</td>
+                                <td><span class="level intermediate">Intermediate</span></td>
+                            </tr>
+                            <tr>
+                                <td>JavaScript</td>
+                                <td>Web Development</td>
+                                <td><span class="level intermediate">Intermediate</span></td>
+                            </tr>
+                            <tr>
+                                <td>React.js</td>
+                                <td>Web Development</td>
+                                <td><span class="level beginner">Beginner</span></td>
+                            </tr>
+                            <tr>
+                                <td>Node.js</td>
+                                <td>Web Development</td>
+                                <td><span class="level beginner">Beginner</span></td>
+                            </tr>
+                            <tr>
+                                <td>Git &amp; GitHub</td>
+                                <td>Tools</td>
+                                <td><span class="level intermediate">Intermediate</span></td>
+                            </tr>
+                            <tr>
+                                <td>Problem Solving</td>
+                                <td>Soft Skill</td>
+                                <td><span class="level advanced">Advanced</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Deemantha Viraj. All rights reserved.</p>
+        <nav class="footer-nav">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    
+</body>
+</html>

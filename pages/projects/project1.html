@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maze of UCSC</title>
+    <link rel="icon" href="../../assets/images/my2.jpg" type="image/jpg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .project-detail {
+            padding: 120px 10% 80px;
+        }
+
+        .project-detail-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 960px;
+            margin: 0 auto;
+            animation: slideDown 0.8s ease forwards;
+        }
+
+        .back-btn {
+            color: #00abf0;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            width: fit-content;
+            transition: letter-spacing 0.3s;
+        }
+
+        .back-btn:hover {
+            letter-spacing: 1.5px;
+        }
+
+        .project-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .project-header h1 span {
+            color: #00abf0;
+        }
+
+        .project-tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .tag {
+            background: #112e42;
+            color: #00abf0;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 20px;
+            border: 1px solid #00abf033;
+        }
+
+        /* Section Cards */
+        .project-body {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .section-card {
+            background: #112e42;
+            border-radius: 16px;
+            padding: 28px 32px;
+            transition: transform 0.3s, border 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .section-card:hover {
+            transform: translateY(-4px);
+            border-color: #00abf033;
+        }
+
+        .section-card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00abf0;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-card h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: #00abf0;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .section-card p {
+            font-size: 15px;
+            color: #b0c4d3;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* Rules Grid */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+        }
+
+        .rule-item {
+            background: #0a1f28;
+            border-radius: 10px;
+            padding: 16px 18px;
+            border-left: 3px solid #00abf0;
+            transition: transform 0.3s;
+        }
+
+        .rule-item:hover {
+            transform: translateX(4px);
+        }
+
+        .rule-item .rule-num {
+            font-size: 11px;
+            color: #00abf0;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .rule-item p {
+            font-size: 13px;
+            color: #b0c4d3;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Players */
+        .players-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .player-card {
+            flex: 1;
+            min-width: 180px;
+            background: #0a1f28;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #00abf022;
+            transition: 0.3s;
+        }
+
+        .player-card:hover {
+            border-color: #00abf0;
+            transform: translateY(-4px);
+        }
+
+        .player-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #00abf0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #0a1f28;
+            margin: 0 auto 14px;
+        }
+
+        .player-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .player-info {
+            font-size: 12px;
+            color: #b0c4d3;
+            line-height: 1.8;
+        }
+
+        .player-info span {
+            color: #00abf0;
+            font-weight: 600;
+        }
+
+        /* Bawana Effects */
+        .bawana-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+        }
+
+        .bawana-item {
+            background: #0a1f28;
+            border-radius: 10px;
+            padding: 18px;
+            transition: transform 0.3s;
+        }
+
+        .bawana-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .bawana-item .effect-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .bawana-item p {
+            font-size: 13px;
+            color: #b0c4d3;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .effect-poison  { border-left: 3px solid #ff4444; }
+        .effect-poison  .effect-label { color: #ff4444; }
+        .effect-dizzy   { border-left: 3px solid #ffaa00; }
+        .effect-dizzy   .effect-label { color: #ffaa00; }
+        .effect-trigger { border-left: 3px solid #ff6b35; }
+        .effect-trigger .effect-label { color: #ff6b35; }
+        .effect-happy   { border-left: 3px solid #00f090; }
+        .effect-happy   .effect-label { color: #00f090; }
+
+        /* Tech Stack */
+        .tech-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tech-pill {
+            background: #0a1f28;
+            border: 1px solid #00abf033;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ededed;
+            transition: 0.3s;
+        }
+
+        .tech-pill:hover {
+            border-color: #00abf0;
+            color: #00abf0;
+        }
+
+        /* Input Files */
+        .file-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .file-entry {
+            background: #0a1f28;
+            border-radius: 8px;
+            padding: 13px 18px;
+            font-size: 14px;
+            color: #b0c4d3;
+            border-left: 3px solid #00abf033;
+            transition: border 0.3s;
+        }
+
+        .file-entry:hover {
+            border-left-color: #00abf0;
+        }
+
+        .file-entry strong {
+            color: #00abf0;
+            font-family: monospace;
+            font-size: 15px;
+        }
+
+        .file-entry code {
+            color: #00abf0;
+            font-family: monospace;
+            background: #112e42;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        /* Buttons */
+        .project-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 32px;
+            background: #00abf0;
+            color: #0a1f28;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: 0.3s;
+            border: 2px solid #00abf0;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: #00abf0;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #00abf0;
+        }
+
+        .btn-outline:hover {
+            background: #00abf0;
+            color: #0a1f28;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-detail { padding: 100px 5% 60px; }
+            .project-header h1 { font-size: 30px; }
+            .players-row { flex-direction: column; }
+            .project-links { flex-direction: column; }
+            .btn { text-align: center; }
+            .section-card { padding: 20px; }
+            .project-banner { padding: 24px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="../../index.html" class="logo">Portfolio</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav class="navbar" id="navbar">
+            <a href="../../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="../portfolio.html">Portfolio</a>
+            <a href="../contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <main>
+    <section class="project-detail">
+        <div class="project-detail-container">
+
+            <a href="../portfolio.html" class="back-btn">← Back to Portfolio</a>
+
+            <!-- Title -->
+            <div class="project-header">
+                <h1>Maze of <span>UCSC</span></h1>
+                <div class="project-tag-row">
+                    <span class="tag">C</span>
+                    <span class="tag">Game Development</span>
+                    <span class="tag">3-Floor Maze</span>
+                    <span class="tag">Multi-Player</span>
+                    <span class="tag">File I/O</span>
+                </div>
+            </div>
+
+            <div class="project-body">
+
+                <!-- Overview -->
+                <div class="section-card">
+                    <h2>Overview</h2>
+                    <p>
+                        Maze of UCSC is a classical three player maze runner game developed in C. Players navigate a
+                        three floor maze using dice rolls to capture a randomly placed flag. The maze features stairs
+                        connecting floors bidirectionally, poles for rapid descent, impassable walls, and a special zone
+                        called 'Bawana' that applies random status effects to any
+                        player who enters. All maze elements, walls, stairs, poles, and the flag are loaded from
+                        plain text configuration files, making the game fully customisable without recompiling.
+                    </p>
+                </div>
+
+                <!-- Key Rules -->
+                <div class="section-card">
+                    <h2>Key Rules</h2>
+                    <div class="rules-grid">
+                        <div class="rule-item">
+                            <div class="rule-num">Rule 1 — Entry</div>
+                            <p>Players must roll a 6 on the movement dice to enter the maze from the starting area.</p>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-num">Rule 2 — Movement</div>
+                            <p>Two dice: movement (1-6) and direction. Direction dice is thrown every 4th roll. No partial movement is allowed.</p>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-num">Rule 4 — Stairs & Poles</div>
+                            <p>Landing mid-movement on a stair or pole triggers it. Remaining moves continue from the new landing cell.</p>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-num">Rule 5 — Capture</div>
+                            <p>Landing on a cell occupied by another player sends that player back to their starting area.</p>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-num">Rule 6 — Stair Flip</div>
+                            <p>Every 5 rounds, stair directions randomly reverse , previously up-only stairs may become down-only.</p>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-num">Rule 7 — Bawana</div>
+                            <p>Special zone with 12 cells giving: Food Poisoning, Disoriented, Triggered, Happy, or bonus movement points.</p>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-num">Rule 8 — Consumables</div>
+                            <p>Each cell has a consumable value (0-4) deducted from movement points as the player passes through it.</p>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-num">Rule 11 — Depletion</div>
+                            <p>If movement points reach zero or go negative, the player is immediately transported to Bawana.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bawana Effects -->
+                <div class="section-card">
+                    <h2>Bawana Effects</h2>
+                    <div class="bawana-grid">
+                        <div class="bawana-item effect-poison">
+                            <div class="effect-label">Food Poisoning</div>
+                            <p>Player misses 3 full rounds and is randomly repositioned within Bawana after recovery with zero movement points.</p>
+                        </div>
+                        <div class="bawana-item effect-dizzy">
+                            <div class="effect-label">Disoriented</div>
+                            <p>+50 movement points. Player moves randomly for 4 throws , direction dice is fully overridden.</p>
+                        </div>
+                        <div class="bawana-item effect-trigger">
+                            <div class="effect-label">Triggered</div>
+                            <p>+50 movement points. Player moves at double speed ,a dice roll of 4 moves the player 8 cells.</p>
+                        </div>
+                        <div class="bawana-item effect-happy">
+                            <div class="effect-label">Happy</div>
+                            <p>+200 movement points. Placed at the Bawana entrance with no negative side effects.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tech Stack -->
+                <div class="section-card">
+                    <h2>Tech Stack</h2>
+                    <div class="tech-row">
+                        <div class="tech-pill">C</div>
+                        <div class="tech-pill">File I/O</div>
+                        <div class="tech-pill">Structs</div>
+                        <div class="tech-pill">Pointers</div>
+                        <div class="tech-pill">Random Seed</div>
+                        <div class="tech-pill">Modular Design</div>
+                    </div>
+                </div>
+
+                <!-- Input Files -->
+                <div class="section-card">
+                    <h2>Input Files</h2>
+                    <div class="file-list">
+                        <div class="file-entry"><strong>stairs.txt</strong> — Stair connections between floors, e.g. <code>[0, 4, 5, 2, 0, 10]</code></div>
+                        <div class="file-entry"><strong>poles.txt</strong> — Sliding pole positions and floor range, e.g. <code>[0, 2, 5, 24]</code></div>
+                        <div class="file-entry"><strong>walls.txt</strong> — Impassable wall segments per floor, e.g. <code>[1, 0, 2, 8, 2]</code></div>
+                        <div class="file-entry"><strong>flag.txt</strong> — Single flag location, e.g. <code>[floor, width, length]</code></div>
+                        <div class="file-entry"><strong>seed.txt</strong> — RNG seed for reproducible and testable game sessions</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="project-links">
+                <a href="https://github.com/DEEMaviraj/MazeRunnerUCSC-final.git" class="btn" target="_blank">View on GitHub</a>
+                <a href="../portfolio.html" class="btn btn-outline">← Back to Portfolio</a>
+            </div>
+
+        </div>
+    </section>
+    </main>
+    
+
+    <footer class="footer">
+        <p>&copy; 2026 Deemantha Viraj. All rights reserved.</p>
+        <nav class="footer-nav">
+            <a href="../../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="../portfolio.html">Portfolio</a>
+            <a href="../contact.html">Contact</a>
+        </nav>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+
+</body>
+</html>

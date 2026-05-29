@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website | Deemantha Viraj</title>
+    <link rel="icon" href="../../assets/images/my2.jpg" type="image/jpg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .project-detail {
+            padding: 120px 10% 80px;
+        }
+
+        .project-detail-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 960px;
+            margin: 0 auto;
+            animation: slideDown 0.8s ease forwards;
+        }
+
+        .back-btn {
+            color: #00abf0;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            width: fit-content;
+            transition: letter-spacing 0.3s;
+        }
+
+        .back-btn:hover { letter-spacing: 1.5px; }
+
+        /* Header */
+        .project-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .project-header h1 span { color: #00abf0; }
+
+        .project-tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .tag {
+            background: #112e42;
+            color: #00abf0;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 20px;
+            border: 1px solid #00abf033;
+        }
+
+        /* Section cards */
+        .project-body {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .section-card {
+            background: #112e42;
+            border-radius: 16px;
+            padding: 28px 32px;
+            transition: transform 0.3s, border 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .section-card:hover {
+            transform: translateY(-4px);
+            border-color: #00abf033;
+        }
+
+        .section-card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00abf0;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-card h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: #00abf0;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .section-card p {
+            font-size: 15px;
+            color: #b0c4d3;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* Feature list */
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: #0a1f28;
+            border-radius: 10px;
+            padding: 14px 18px;
+            transition: transform 0.3s;
+        }
+
+        .feature-item:hover { transform: translateX(4px); }
+
+        .feature-item i {
+            font-size: 16px;
+            color: #00abf0;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .feature-item p {
+            font-size: 14px;
+            color: #b0c4d3;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Pages list */
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+        }
+
+        .page-item {
+            background: #0a1f28;
+            border-radius: 10px;
+            padding: 16px 18px;
+            border-left: 3px solid #00abf0;
+            transition: transform 0.3s;
+        }
+
+        .page-item:hover { transform: translateX(4px); }
+
+        .page-item .page-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ededed;
+            margin-bottom: 6px;
+        }
+
+        .page-item p {
+            font-size: 13px;
+            color: #b0c4d3;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Tech row */
+        .tech-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tech-pill {
+            background: #0a1f28;
+            border: 1px solid #00abf033;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ededed;
+            transition: 0.3s;
+        }
+
+        .tech-pill:hover {
+            border-color: #00abf0;
+            color: #00abf0;
+        }
+
+        /* Buttons */
+        .project-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 32px;
+            background: #00abf0;
+            color: #0a1f28;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: 0.3s;
+            border: 2px solid #00abf0;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: #00abf0;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #00abf0;
+        }
+
+        .btn-outline:hover {
+            background: #00abf0;
+            color: #0a1f28;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-detail { padding: 100px 5% 60px; }
+            .project-header h1 { font-size: 30px; }
+            .project-links { flex-direction: column; }
+            .btn { text-align: center; }
+            .section-card { padding: 20px; }
+            .project-banner { padding: 24px 16px; }
+            .skeleton-hero { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="../../index.html" class="logo">Portfolio</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav class="navbar" id="navbar">
+            <a href="../../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="../portfolio.html">Portfolio</a>
+            <a href="../contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <main>
+        <section class="project-detail">
+            <div class="project-detail-container">
+
+                <a href="../portfolio.html" class="back-btn">← Back to Portfolio</a>
+
+                <!-- Title -->
+                <div class="project-header">
+                    <h1><span>Portfolio</span> Website</h1>
+                    <div class="project-tag-row">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">Responsive</span>
+                        <span class="tag">Personal Project</span>
+                    </div>
+                </div>
+
+                <div class="project-body">
+
+                    <!-- Overview -->
+                    <div class="section-card">
+                        <h2>Overview</h2>
+                        <p>
+                            A fully responsive personal portfolio website built from scratch using only HTML and CSS,
+                            no frameworks or libraries. The site showcases my projects, skills, and background through
+                            a clean dark-themed design with smooth animations, a consistent color system using CSS variables,
+                            and a mobile-first responsive layout that works across all screen sizes.
+                        </p>
+                    </div>
+
+                    <!-- Pages -->
+                    <div class="section-card">
+                        <h2>Pages</h2>
+                        <div class="pages-grid">
+                            <div class="page-item">
+                                <div class="page-name">Home</div>
+                                <p>Hero section with introduction, social links, and a skills snapshot.</p>
+                            </div>
+                            <div class="page-item">
+                                <div class="page-name">About</div>
+                                <p>Personal info cards, bio paragraph, and a technical skills table.</p>
+                            </div>
+                            <div class="page-item">
+                                <div class="page-name">Portfolio</div>
+                                <p>Project cards grid linking to individual project detail pages.</p>
+                            </div>
+                            <div class="page-item">
+                                <div class="page-name">Contact</div>
+                                <p>Contact form with name, email, subject, and message fields.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="section-card">
+                        <h2>Key Features</h2>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <i class="fas fa-mobile-alt"></i>
+                                <p>Fully responsive layout with breakpoints for desktop, tablet, and mobile using CSS media queries.</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-paint-brush"></i>
+                                <p>Consistent dark theme using CSS custom properties (variables) across all pages — no inline styles.</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-magic"></i>
+                                <p>CSS-only animations including slide-down reveals, hover lifts, and smooth fill transitions on buttons and social icons.</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-code"></i>
+                                <p>Semantic HTML5 structure using header, main, section, article, aside, nav, and footer elements throughout.</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-bars"></i>
+                                <p>Pure CSS hamburger menu for mobile navigation — no JavaScript required.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Stack -->
+                    <div class="section-card">
+                        <h2>Tech Stack</h2>
+                        <div class="tech-row">
+                            <div class="tech-pill">HTML</div>
+                            <div class="tech-pill">CSS</div>
+                            <div class="tech-pill">CSS Variables</div>
+                            <div class="tech-pill">Flexbox</div>
+                            <div class="tech-pill">CSS Grid</div>
+                            <div class="tech-pill">Media Queries</div>
+                            <div class="tech-pill">Google Fonts</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Buttons -->
+                <div class="project-links">
+                    <a href="https://github.com/DEEMaviraj/Portfolio-Web-Site-using-CSS-and-HTML.git" class="btn" target="_blank">View on GitHub</a>
+                    <a href="../portfolio.html" class="btn btn-outline">← Back to Portfolio</a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Deemantha Viraj. All rights reserved.</p>
+        <nav class="footer-nav">
+            <a href="../../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="../portfolio.html">Portfolio</a>
+            <a href="../contact.html">Contact</a>
+        </nav>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+
+</body>
+</html>

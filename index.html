@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Deemantha Viraj</title>
+    <link rel="icon" href="assets/images/my2.jpg" type="image/jpg">
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        
+                
+        .home {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 78px 10% 60px;
+            gap: 70px;
+            flex-wrap: wrap;
+        }
+
+        .home-image {
+            position: relative;
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeSlideLeft 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        .home-image::before {
+            content: '';
+            position: absolute;
+            width: 320px; height: 320px;
+            border-radius: 50%;
+            border: 2px dashed rgba(0,171,240,0.3);
+            animation: spinRing 18s linear infinite;
+        }
+
+        .home-image::after {
+            content: '';
+            position: absolute;
+            width: 290px; height: 290px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,171,240,0.12);
+            animation: spinRing 12s linear infinite reverse;
+        }
+
+        @keyframes spinRing {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        .home-image img {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            border: 4px solid #00abf0;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 30px rgba(0,171,240,0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .home-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 55px rgba(0,171,240,0.45);
+        }
+
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            background: #00abf0;
+            z-index: 2;
+        }
+
+        .dot-1 { width:10px; height:10px; top:10px; right:20px; opacity:0.7; animation: floatDot 3s ease-in-out infinite alternate; }
+        .dot-2 { width:6px;  height:6px;  bottom:20px; left:10px; opacity:0.5; animation: floatDot 3s ease-in-out 1s infinite alternate; }
+        .dot-3 { width:8px;  height:8px;  top:50%; right:-10px; opacity:0.6; animation: floatDot 3s ease-in-out 0.5s infinite alternate; }
+
+        @keyframes floatDot {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-14px); }
+        }
+
+        .home-content {
+            flex: 1;
+            min-width: 280px;
+            max-width: 580px;
+            display: flex;
+            flex-direction: column;
+            gap: 26px;
+        }
+
+        .greeting-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,171,240,0.1);
+            border: 1px solid rgba(0,171,240,0.25);
+            border-radius: 30px;
+            padding: 6px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #00abf0;
+            width: fit-content;
+            animation: fadeSlideRight 0.7s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .dot-pulse {
+            width: 8px; height: 8px;
+            background: #00abf0;
+            border-radius: 50%;
+            animation: pulseDot 1.5s infinite;
+        }
+
+        @keyframes pulseDot {
+            0%,100% { opacity:1; transform:scale(1); }
+            50%      { opacity:0.4; transform:scale(0.7); }
+        }
+
+        .home-content h1 {
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.15;
+            animation: fadeSlideRight 0.8s ease 0.6s forwards;
+            opacity: 0;
+            margin: 0;
+        }
+
+        .name-highlight {
+            color: #00abf0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .name-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px; left: 0;
+            width: 100%;
+            height: 3px;
+            background: #00abf0;
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: sweepLine 0.5s ease 1.6s forwards;
+        }
+
+        @keyframes sweepLine {
+            to { transform: scaleX(1); }
+        }
+
+        .home-content h3 {
+            font-size: 20px;
+            font-weight: 500;
+            color: #b0c4d3;
+            min-height: 1.6em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin: 0;
+            animation: fadeSlideRight 0.8s ease 0.8s forwards;
+            opacity: 0;
+        }
+
+        .role-text {
+            display: inline-block;
+            min-width: 320px;         /* wide enough for the longest role text */
+        }
+
+        .role-text::after {
+            content: '';
+            display: inline-block;
+            width: 2px;
+            height: 1.25em;
+            background: #00abf0;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+            -webkit-background-clip: initial;
+            border-radius: 1px;
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: blinkCursor 0.8s step-end infinite;
+        }
+
+        @keyframes blinkCursor {
+            0%,100% { opacity:1; }
+            50%      { opacity:0; }
+        }
+
+        .description {
+            animation: fadeSlideRight 0.8s ease 1s forwards;
+            opacity: 0;
+        }
+
+        .description p {
+            font-size: 15px;
+            color: #b0c4d3;
+            line-height: 1.85;
+            border-left: 3px solid rgba(0,171,240,0.35);
+            padding-left: 16px;
+            margin: 0;
+        }
+
+        .home-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            animation: fadeSlideRight 0.8s ease 1.2s forwards;
+            opacity: 0;
+        }
+
+        .social-media {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-media a {
+            position: relative;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 42px; height: 42px;
+            border: 2px solid #00abf0;
+            border-radius: 50%;
+            font-size: 20px;
+            color: #00abf0;
+            text-decoration: none;
+            z-index: 1;
+            overflow: hidden;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .social-media a::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 0; height: 100%;
+            background: #00abf0;
+            z-index: -1;
+            transition: width 0.4s ease;
+        }
+
+        .social-media a:hover { color: #0a1f28; transform: translateY(-4px); }
+        .social-media a:hover::before { width: 100%; }
+
+        .hire-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: #00abf0;
+            color: #0a1f28;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            border: 2px solid #00abf0;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.3s, color 0.3s, transform 0.3s, gap 0.3s;
+        }
+
+        .hire-btn:hover {
+            background: transparent;
+            color: #00abf0;
+            transform: translateY(-3px);
+            gap: 12px;
+        }
+
+        .home-stats {
+            display: flex;
+            animation: fadeSlideRight 0.8s ease 1.4s forwards;
+            opacity: 0;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 0 24px 0 0;
+            margin-right: 24px;
+            border-right: 1px solid rgba(0,171,240,0.2);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+            padding-right: 0;
+            margin-right: 0;
+        }
+
+        .stat-num {
+            font-size: 28px;
+            font-weight: 700;
+            color: #00abf0;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #b0c4d3;
+            font-weight: 500;
+        }
+
+    @media (max-width: 900px) {
+        .home {
+            flex-direction: column-reverse;
+            text-align: center;
+            gap: 40px;
+            padding: 100px 5% 60px;
+        }
+
+        .home-content { align-items: center; max-width: 100%; }
+        .home-content h1 { font-size: 36px; }
+        .home-content h3 { justify-content: center; font-size: 17px; }
+        .description p { text-align: left; }
+        .home-actions { justify-content: center; }
+        .home-stats { justify-content: center; }
+        .home-image::before { width:260px; height:260px; }
+        .home-image::after  { width:236px; height:236px; }
+        .home-image img { width:210px; height:210px; }
+        .role-text {min-width: 200px;}
+}
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <header class="header">
+        <a href="index.html" class="logo">Portfolio</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav class="navbar" id="navbar">
+            <a href="index.html">Home</a>
+            <a href="pages/about.html">About</a>
+            <a href="pages/portfolio.html">Portfolio</a>
+            <a href="pages/contact.html">Contact</a>
+        </nav>
+    </header>
+
+<!-- Overlay -->
+<div class="nav-overlay" id="navOverlay"></div>
+
+    <main>
+        <section class="home">
+
+            <!-- Profile Image -->
+            <div class="home-image">
+                <span class="dot dot-1"></span>
+                <span class="dot dot-2"></span>
+                <span class="dot dot-3"></span>
+                <img src="assets/images/my1.png" alt="Deemantha Viraj">
+            </div>
+
+            <!-- Content -->
+            <div class="home-content">
+
+                <div class="greeting-badge">
+                    <span class="dot-pulse"></span>
+                    Available for work
+                </div>
+
+                <h1>Hi, I'm <span class="name-highlight">Deemantha Viraj</span></h1>
+
+                <h3>
+                    <span class="role-text"></span>
+                </h3>
+
+                <div class="description">
+                    <p>I am a Computer Science undergraduate and ICT tutor with a strong interest in
+                        programming, problem solving, and technology. I enjoy learning and applying
+                        computing concepts to develop practical and efficient software solutions.</p>
+                </div>
+
+                <div class="home-actions">
+                    <div class="social-media">
+                        <a href="https://www.linkedin.com/in/deemantha-viraj/" target="_blank" aria-label="LinkedIn">
+                            <i class='bx bxl-linkedin'></i>
+                        </a>
+                        <a href="https://github.com/DEEMaviraj" target="_blank" aria-label="GitHub">
+                            <i class='bx bxl-github'></i>
+                        </a>
+                        <a href="https://wa.me/94784197946" target="_blank" aria-label="WhatsApp">
+                            <i class='bx bxl-whatsapp'></i>
+                        </a>
+                    </div>
+                    <a href="pages/contact.html" class="hire-btn">
+                        Hire Me <i class='bx bx-right-arrow-alt'></i>
+                    </a>
+                </div>
+
+                <div class="home-stats">
+                    <div class="stat-item">
+                        <span class="stat-num">1+</span>
+                        <span class="stat-label">Years Coding</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">5+</span>
+                        <span class="stat-label">Projects Done</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">3</span>
+                        <span class="stat-label">Languages</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Deemantha Viraj. All rights reserved.</p>
+        <nav class="footer-nav">
+            <a href="index.html">Home</a>
+            <a href="pages/about.html">About</a>
+            <a href="pages/portfolio.html">Portfolio</a>
+            <a href="pages/contact.html">Contact</a>
+        </nav>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

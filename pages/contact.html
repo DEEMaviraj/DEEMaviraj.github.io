@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Deemantha Viraj</title>
+    <link rel="icon" href="../assets/images/my2.jpg" type="image/jpg">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+
+        .contact {
+            padding: 120px 10% 80px;
+        }
+
+        .contact-heading {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideDown 0.8s ease forwards;
+        }
+
+        .contact-heading h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .contact-heading h1 span {
+            color: #00abf0;
+        }
+
+        .contact-heading p {
+            font-size: 16px;
+            color: #b0c4d3;
+        }
+
+        /*Main Layout*/
+        .contact-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+            animation: slideDown 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        /*Left: Info Panel*/
+        .contact-info {
+            flex: 1;
+            min-width: 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: #112e42;
+            border-radius: 16px;
+            padding: 28px 24px;
+            border: 1px solid transparent;
+            transition: transform 0.3s, border 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            border-color: #00abf033;
+        }
+
+        .info-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #00abf0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card h3::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background: #00abf0;
+            border-radius: 2px;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(0, 171, 240, 0.1);
+            border: 1px solid rgba(0, 171, 240, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: #00abf0;
+            flex-shrink: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .contact-list li:hover .contact-icon {
+            background: #00abf0;
+            color: #0a1f28;
+        }
+
+        .contact-detail {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .contact-detail strong {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ededed;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-detail a,
+        .contact-detail span {
+            font-size: 14px;
+            color: #b0c4d3;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-detail a:hover { color: #00abf0; }
+
+        /* Social card */
+        .social-card {
+            background: #112e42;
+            border-radius: 16px;
+            padding: 28px 24px;
+            border: 1px solid transparent;
+            transition: transform 0.3s, border 0.3s;
+        }
+
+        .social-card:hover {
+            transform: translateY(-4px);
+            border-color: #00abf033;
+        }
+
+        .social-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #00abf0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-card h3::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background: #00abf0;
+            border-radius: 2px;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            background: #0a1f28;
+            border-radius: 10px;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: border 0.3s, transform 0.3s;
+        }
+
+        .social-link:hover {
+            border-color: #00abf0;
+            transform: translateX(4px);
+        }
+
+        .social-link i {
+            font-size: 18px;
+            color: #00abf0;
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-link span {
+            font-size: 14px;
+            font-weight: 500;
+            color: #b0c4d3;
+            transition: color 0.3s;
+        }
+
+        .social-link:hover span { color: #00abf0; }
+
+        /* Right: Form  */
+        .contact-form-wrapper {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .contact-form {
+            background: #112e42;
+            border-radius: 16px;
+            padding: 36px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            border: 1px solid transparent;
+            transition: border 0.3s;
+            box-sizing: border-box;
+        }
+
+        .contact-form:hover { border-color: rgba(0, 171, 240, 0.2); }
+
+        .form-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00abf0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        .form-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: #00abf0;
+            border-radius: 2px;
+        }
+
+        /* Two column row */
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group { flex: 1; }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ededed;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: #0a1f28;
+            border: 1px solid rgba(0, 171, 240, 0.2);
+            border-radius: 10px;
+            padding: 13px 16px;
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            color: #ededed;
+            outline: none;
+            transition: border 0.3s, box-shadow 0.3s;
+            resize: vertical;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-group select {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300abf0' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+
+        .form-group select option {
+            background: #112e42;
+            color: #ededed;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #00abf0;
+            box-shadow: 0 0 0 3px rgba(0, 171, 240, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(176, 196, 211, 0.45);
+        }
+
+        .submit-btn {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 32px;
+            background: #00abf0;
+            color: #0a1f28;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            border: 2px solid #00abf0;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, gap 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: #00abf0;
+            gap: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact { padding: 100px 5% 60px; }
+            .contact-heading h1 { font-size: 28px; }
+            .contact-container { flex-direction: column; }
+            .form-row { flex-direction: column; gap: 22px; }
+            .contact-form { padding: 24px 20px; }
+            .submit-btn { align-self: stretch; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="../index.html" class="logo">Portfolio</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav class="navbar" id="navbar">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="nav-overlay" id="navOverlay"></div>
+    </header>
+
+    <!-- Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <main>
+        <section class="contact">
+
+            <div class="contact-heading">
+                <h1>Get In <span>Touch</span></h1>
+                <p>Have a project in mind or just want to say hello? I'd love to hear from you.</p>
+            </div>
+
+            <div class="contact-container">
+
+                <!-- Left: Info + Social -->
+                <aside class="contact-info">
+
+                    <div class="info-card">
+                        <h3>Contact Details</h3>
+                        <ul class="contact-list">
+                            <li>
+                                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                                <div class="contact-detail">
+                                    <strong>Email</strong>
+                                    <a href="mailto:deemaviraj@email.com">deemaviraj@email.com</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="contact-detail">
+                                    <strong>Location</strong>
+                                    <span>Sri Lanka</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contact-icon"><i class="fas fa-university"></i></div>
+                                <div class="contact-detail">
+                                    <strong>University</strong>
+                                    <span>University of Colombo</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contact-icon"><i class="fas fa-briefcase"></i></div>
+                                <div class="contact-detail">
+                                    <strong>Current Role</strong>
+                                    <span>ICT Tutor &amp; Freelancer</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="social-card">
+                        <h3>Find Me On</h3>
+                        <div class="social-links">
+                            <a href="https://github.com/DEEMaviraj"" target="_blank" class="social-link">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/deemantha-viraj/" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin-in"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="https://x.com/DeemanthaV" target="_blank" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                                <span>Twitter</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </aside>
+
+                <!Right Form>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" action="https://formspree.io/f/xvzyajka" method="POST" novalidate>
+
+                        <p class="form-title">Send a Message</p>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="Your full name"
+                                    required
+                                    autocomplete="name"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="your@email.com"
+                                    required
+                                    autocomplete="email"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="" disabled selected>Select a subject</option>
+                                <option value="hire">Hiring / Freelance Work</option>
+                                <option value="collab">Collaboration</option>
+                                <option value="tuition">ICT Tuition</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="7"
+                                placeholder="Write your message here..."
+                                required
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Send Message <i class="fas fa-paper-plane"></i>
+                        </button>
+
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Deemantha Viraj. All rights reserved.</p>
+        <nav class="footer-nav">
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </footer>
+
+    <script src="../js/script.js"></script>
+
+</body>
+</html>

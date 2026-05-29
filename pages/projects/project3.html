@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFS Algorithm | Deemantha Viraj</title>
+    <link rel="icon" href="../../assets/images/my2.jpg" type="image/jpg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .project-detail {
+            padding: 120px 10% 80px;
+        }
+
+        .project-detail-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 960px;
+            margin: 0 auto;
+            animation: slideDown 0.8s ease forwards;
+        }
+
+        .back-btn {
+            color: #00abf0;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            width: fit-content;
+            transition: letter-spacing 0.3s;
+        }
+
+        .back-btn:hover { letter-spacing: 1.5px; }
+
+        /* Header */
+        .project-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .project-header h1 span { color: #00abf0; }
+
+        .project-tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .tag {
+            background: #112e42;
+            color: #00abf0;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 20px;
+            border: 1px solid #00abf033;
+        }
+
+        /* Banner */
+        .project-banner {
+            background: #112e42;
+            border-radius: 20px;
+            padding: 40px 32px;
+            border: 1px solid #00abf022;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .banner-label {
+            font-size: 12px;
+            color: #00abf0;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* BFS Graph Visual */
+        .graph-visual {
+            width: 100%;
+            max-width: 620px;
+            background: #0a1f28;
+            border-radius: 14px;
+            padding: 32px 24px;
+            border: 1px solid #00abf033;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .graph-nodes {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .graph-node {
+            display: flex;
+            align-items: center;
+        }
+
+        .node-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #112e42;
+            border: 2px solid #00abf0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #00abf0;
+            transition: background 0.3s, color 0.3s;
+            position: relative;
+        }
+
+        .node-circle.start {
+            background: #00abf0;
+            color: #0a1f28;
+        }
+
+        .node-circle.visited {
+            background: #00abf022;
+            border-color: #00abf077;
+            color: #00abf077;
+        }
+
+        .node-circle.unreachable {
+            border-color: #ff444466;
+            color: #ff4444;
+            background: #ff444411;
+        }
+
+        .node-arrow {
+            font-size: 13px;
+            color: #00abf066;
+            margin: 0 6px;
+            font-weight: 700;
+        }
+
+        .node-weight {
+            position: absolute;
+            top: -18px;
+            font-size: 11px;
+            color: #ffaa00;
+            font-weight: 600;
+            background: #0a1f28;
+            padding: 1px 5px;
+            border-radius: 4px;
+        }
+
+        .bfs-path {
+            font-size: 14px;
+            color: #b0c4d3;
+            font-family: monospace;
+            background: #112e42;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border-left: 3px solid #00abf0;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .bfs-path span { color: #00abf0; font-weight: 700; }
+
+        /* Stats */
+        .page-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .stat-box {
+            flex: 1;
+            min-width: 120px;
+            background: #0a1f28;
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            border: 1px solid #00abf022;
+            transition: transform 0.3s, border 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-4px);
+            border-color: #00abf0;
+        }
+
+        .stat-box .stat-num {
+            font-size: 26px;
+            font-weight: 700;
+            color: #00abf0;
+        }
+
+        .stat-box .stat-label {
+            font-size: 12px;
+            color: #b0c4d3;
+            margin-top: 4px;
+        }
+
+        /* Section cards */
+        .project-body {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .section-card {
+            background: #112e42;
+            border-radius: 16px;
+            padding: 28px 32px;
+            transition: transform 0.3s, border 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .section-card:hover {
+            transform: translateY(-4px);
+            border-color: #00abf033;
+        }
+
+        .section-card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00abf0;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-card h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: #00abf0;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .section-card p {
+            font-size: 15px;
+            color: #b0c4d3;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* IO Examples */
+        .io-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .io-box {
+            background: #0a1f28;
+            border-radius: 10px;
+            padding: 18px;
+            border-top: 3px solid #00abf0;
+        }
+
+        .io-box.output-box { border-top-color: #00f090; }
+
+        .io-box h4 {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: #00abf0;
+        }
+
+        .io-box.output-box h4 { color: #00f090; }
+
+        .io-box pre {
+            font-family: monospace;
+            font-size: 13px;
+            color: #b0c4d3;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            margin: 0;
+        }
+
+        .io-box pre .highlight { color: #00abf0; }
+        .io-box pre .success   { color: #00f090; }
+        .io-box pre .warning   { color: #ffaa00; }
+
+        /* Requirements list */
+        .req-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .req-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: #0a1f28;
+            border-radius: 10px;
+            padding: 14px 18px;
+            transition: transform 0.3s;
+        }
+
+        .req-item:hover { transform: translateX(4px); }
+
+        .req-item i {
+            font-size: 15px;
+            color: #00abf0;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .req-item p {
+            font-size: 14px;
+            color: #b0c4d3;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Tech row */
+        .tech-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tech-pill {
+            background: #0a1f28;
+            border: 1px solid #00abf033;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ededed;
+            transition: 0.3s;
+        }
+
+        .tech-pill:hover {
+            border-color: #00abf0;
+            color: #00abf0;
+        }
+
+        /* Buttons */
+        .project-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 13px 32px;
+            background: #00abf0;
+            color: #0a1f28;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: 0.3s;
+            border: 2px solid #00abf0;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: #00abf0;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #00abf0;
+        }
+
+        .btn-outline:hover {
+            background: #00abf0;
+            color: #0a1f28;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-detail { padding: 100px 5% 60px; }
+            .project-header h1 { font-size: 30px; }
+            .project-links { flex-direction: column; }
+            .btn { text-align: center; }
+            .section-card { padding: 20px; }
+            .project-banner { padding: 24px 16px; }
+            .io-grid { grid-template-columns: 1fr; }
+            .graph-nodes { gap: 4px; }
+            .node-circle { width: 38px; height: 38px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="../../index.html" class="logo">Portfolio</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav class="navbar" id="navbar">
+            <a href="../../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="../portfolio.html">Portfolio</a>
+            <a href="../contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <main>
+        <section class="project-detail">
+            <div class="project-detail-container">
+
+                <a href="../portfolio.html" class="back-btn">← Back to Portfolio</a>
+
+                <!-- Title -->
+                <div class="project-header">
+                    <h1>Breadth First <span>Search</span></h1>
+                    <div class="project-tag-row">
+                        <span class="tag">C</span>
+                        <span class="tag">Algorithm</span>
+                        <span class="tag">Graph Theory</span>
+                        <span class="tag">File I/O</span>
+                    </div>
+                </div>
+
+                <div class="project-body">
+
+                    <!-- Overview -->
+                    <div class="section-card">
+                        <h2>Overview</h2>
+                        <p>
+                            A C implementation of the Breadth-First Search (BFS) algorithm developed for the
+                            Foundations of Algorithm module at the University of Colombo. The program reads a
+                            directed or undirected weighted graph from a text file, performs BFS traversal starting
+                            from the first node, computes the total edge weight, and identifies any nodes unreachable
+                            from the starting point.
+                        </p>
+                    </div>
+
+                    <!-- Requirements -->
+                    <div class="section-card">
+                        <h2>Requirements Met</h2>
+                        <div class="req-list">
+                            <div class="req-item">
+                                <i class="fas fa-file-alt"></i>
+                                <p>Reads graph data from a 'graph.txt' file.</p>
+                            </div>
+                            <div class="req-item">
+                                <i class="fas fa-table"></i>
+                                <p>Stores the graph using an adjacency matrix or adjacency list for efficient traversal.</p>
+                            </div>
+                            <div class="req-item">
+                                <i class="fas fa-project-diagram"></i>
+                                <p>Implements BFS traversal starting from the first node, outputting the full traversal path.</p>
+                            </div>
+                            <div class="req-item">
+                                <i class="fas fa-weight-hanging"></i>
+                                <p>Computes the total weight of the graph, correctly accounting for directed vs undirected edge counting.</p>
+                            </div>
+                            <div class="req-item">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <p>Detects and lists all unreachable nodes from the starting node, outputting "None" if all nodes are reachable.</p>
+                            </div>
+                            <div class="req-item">
+                                <i class="fas fa-linux"></i>
+                                <p>Compiled and tested on Linux. The Makefile produces an executable named 'bfs' as per submission guidelines.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input file format -->
+                    <div class="section-card">
+                        <h2>Input File Format</h2>
+                        <div class="req-list">
+                            <div class="req-item">
+                                <i class="fas fa-hashtag"></i>
+                                <p><strong style="color:#ededed">Line 1:</strong> Number of nodes (e.g. 5 )</p>
+                            </div>
+                            <div class="req-item">
+                                <i class="fas fa-font"></i>
+                                <p><strong style="color:#ededed">Line 2:</strong> Node names separated by spaces (e.g. A B C D E )</p>
+                            </div>
+                            <div class="req-item">
+                                <i class="fas fa-exchange-alt"></i>
+                                <p><strong style="color:#ededed">Line 3:</strong> Graph type either 'directed' or 'undirected'</p>
+                            </div>
+                            <div class="req-item">
+                                <i class="fas fa-link"></i>
+                                <p><strong style="color:#ededed">Remaining lines:</strong> Edges in the format node1 node2 weight (e.g. A B 5 )</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Stack -->
+                    <div class="section-card">
+                        <h2>Tech Stack</h2>
+                        <div class="tech-row">
+                            <div class="tech-pill">C</div>
+                            <div class="tech-pill">BFS Algorithm</div>
+                            <div class="tech-pill">Adjacency Matrix</div>
+                            <div class="tech-pill">File I/O</div>
+                            <div class="tech-pill">Queue </div>
+                            <div class="tech-pill">Makefile</div>
+                            <div class="tech-pill">Linux</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Buttons -->
+                <div class="project-links">
+                    <a href="https://github.com/DEEMaviraj" class="btn" target="_blank">View on GitHub</a>
+                    <a href="../portfolio.html" class="btn btn-outline">← Back to Portfolio</a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Deemantha Viraj. All rights reserved.</p>
+        <nav class="footer-nav">
+            <a href="../../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="../portfolio.html">Portfolio</a>
+            <a href="../contact.html">Contact</a>
+        </nav>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+
+</body>
+</html>
